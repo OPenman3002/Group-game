@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float MovementSpeed;
-
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -20,16 +20,17 @@ public class Player : MonoBehaviour
 	
 	// Update is called once per frame
 	void FixedUpdate ()
-    { 
+    {
+        float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
-        HandleMovement(horizontal);
+        HandleMovement(horizontal,vertical);
 
 		
 	}
-    private void HandleMovement(float horizontal)
+    private void HandleMovement(float horizontal, float vertical)
     {
         myRigidBody.velocity = new Vector2(horizontal*MovementSpeed, myRigidBody.velocity.y);
-
+        myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, vertical * MovementSpeed);
     }
 
 }
